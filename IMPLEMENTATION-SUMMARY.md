@@ -69,7 +69,7 @@ The browser will:
 
 ## 🎨 Features Implemented
 
-✅ Excel data integration (xlsx library)  
+✅ Excel data integration (exceljs library - secure, no vulnerabilities)  
 ✅ Multiple test records support  
 ✅ Unique email generation per run  
 ✅ Headed/headless mode toggle  

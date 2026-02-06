@@ -2,7 +2,7 @@ import { Given, When, Then, setDefaultTimeout, BeforeAll } from '@cucumber/cucum
 import { chromium, Browser, Page } from '@playwright/test';
 import { YahooSignUpPage } from '../../tests/pages/YahooSignUpPage';
 import assert from 'assert';
-import * as XLSX from 'xlsx';
+import ExcelJS from 'exceljs';
 import * as path from 'path';
 
 setDefaultTimeout(60 * 1000); // 60 seconds
@@ -16,10 +16,29 @@ let currentDataIndex = 0;
 // Load Excel data before all tests
 BeforeAll(async function() {
   const excelFilePath = path.join(__dirname, '../../UserInputSignupForm.xlsx');
-  const workbook = XLSX.readFile(excelFilePath);
-  const sheetName = workbook.SheetNames[0];
-  const worksheet = workbook.Sheets[sheetName];
-  testData = XLSX.utils.sheet_to_json(worksheet);
+  const workbook = new ExcelJS.Workbook();
+  await workbook.xlsx.readFile(excelFilePath);
+  
+  const worksheet = workbook.worksheets[0];
+  const headers: string[] = [];
+  
+  // Get headers from first row
+  worksheet.getRow(1).eachCell((cell, colNumber) => {
+    headers[colNumber - 1] = cell.value?.toString() || '';
+  });
+  
+  // Read data rows
+  worksheet.eachRow((row, rowNumber) => {
+    if (rowNumber > 1) { // Skip header row
+      const rowData: any = {};
+      row.eachCell((cell, colNumber) => {
+        const header = headers[colNumber - 1];
+        rowData[header] = cell.value?.toString() || '';
+      });
+      testData.push(rowData);
+    }
+  });
+  
   console.log(`Loaded ${testData.length} test records from Excel file`);
 });
 

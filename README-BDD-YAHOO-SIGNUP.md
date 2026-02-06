@@ -7,7 +7,7 @@ This document describes how to run the BDD (Behavior-Driven Development) test ca
 This test automates the Yahoo account signup process using:
 - **Cucumber.js** for BDD test framework
 - **Playwright** for browser automation
-- **xlsx** library for reading Excel data
+- **exceljs** library for reading Excel data (secure, actively maintained)
 - **TypeScript** for type-safe test implementation
 
 ## Prerequisites
@@ -102,7 +102,7 @@ Feature: Yahoo Account Signup
 
 Located in `features/step_definitions/yahoo_signup.steps.ts`, the step definitions:
 
-1. **Load Excel data** before all tests using the `BeforeAll` hook
+1. **Load Excel data** before all tests using the `BeforeAll` hook (uses exceljs library)
 2. **Launch browser** in headed or headless mode based on the `HEADLESS` environment variable
 3. **Fill the form** with data from the Excel file, generating unique emails with timestamps
 4. **Submit the form** and verify success
