@@ -8,7 +8,8 @@
     "test:debug": "npx playwright test --debug",
     "install:playwright": "npx playwright install",
     "bdd": "cucumber-js --require-module ts-node/register --require features/step_definitions/**/*.ts features/**/*.feature",
-    "bdd:run": "cucumber-js --require-module ts-node/register --require features/step_definitions/**/*.ts features/**/*.feature"
+    "bdd:run": "cucumber-js --require-module ts-node/register --require features/step_definitions/**/*.ts features/**/*.feature",
+    "bdd:headless": "HEADLESS=true cucumber-js --require-module ts-node/register --require features/step_definitions/**/*.ts features/**/*.feature"
   },
   "devDependencies": {
     "@cucumber/cucumber": "^9.2.0",

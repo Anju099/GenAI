@@ -24,7 +24,9 @@ BeforeAll(async function() {
 });
 
 Given('I am on the Yahoo signup page', async function () {
-  browser = await chromium.launch({ headless: false });
+  // Use headless mode when HEADLESS env var is set, otherwise use headed mode
+  const headlessMode = process.env.HEADLESS === 'true';
+  browser = await chromium.launch({ headless: headlessMode });
   page = await browser.newPage();
   signUpPage = new YahooSignUpPage(page);
   await signUpPage.goto();
