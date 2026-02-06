@@ -7,12 +7,17 @@
     "test:headed": "npx playwright test --headed",
     "test:debug": "npx playwright test --debug",
     "install:playwright": "npx playwright install",
-    "bdd": "cucumber-js --require-module ts-node/register --require features/step_definitions/**/*.ts features/**/*.feature"
+    "bdd": "cucumber-js --require-module ts-node/register --require features/step_definitions/**/*.ts features/**/*.feature",
+    "bdd:run": "cucumber-js --require-module ts-node/register --require features/step_definitions/**/*.ts features/**/*.feature",
+    "bdd:headless": "HEADLESS=true cucumber-js --require-module ts-node/register --require features/step_definitions/**/*.ts features/**/*.feature"
   },
   "devDependencies": {
-    "@playwright/test": "^1.45.0",
-    "typescript": "^5.1.6",
     "@cucumber/cucumber": "^9.2.0",
-    "ts-node": "^10.9.1"
+    "@playwright/test": "^1.45.0",
+    "ts-node": "^10.9.1",
+    "typescript": "^5.1.6"
+  },
+  "dependencies": {
+    "exceljs": "^4.4.0"
   }
 }
